@@ -58,12 +58,18 @@ public class ChunkLoadListener extends BaseListener{
                         }
                     }
                     if(entity.getType()==EntityType.MINECART_CHEST){
+
                         StorageMinecart minecart = (StorageMinecart) entity;
                         if (!ChestUtils.isLootinContainer(minecart, null, ContainerType.MINECART)){
                             if(minecart.getLootTable() == null || plugin.isBlackListedLootable(minecart.getLootTable())) {
                                 continue;
                             }
-                            ChestUtils.setLootinContainer(minecart, null, ContainerType.MINECART);
+                            WrappedSchedulerBuilder.builder()
+                                    .plugin(plugin)
+                                    .build()
+                                    .runTaskLaterAtEntity(minecart,() -> {
+                                        ChestUtils.setLootinContainer(minecart, null, ContainerType.MINECART);
+                                    }, 1);
 
                         }
                     }
