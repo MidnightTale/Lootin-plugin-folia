@@ -8,6 +8,8 @@ import com.github.sachin.lootin.utils.ChestUtils;
 import com.github.sachin.lootin.utils.ContainerType;
 import com.github.sachin.lootin.utils.LConstants;
 
+import me.nahu.scheduler.wrapper.WrappedSchedulerBuilder;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
@@ -31,7 +33,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
+//import org.bukkit.scheduler.BukkitRunnable;
 
 public class ChestEvents extends BaseListener{
     
@@ -223,9 +225,21 @@ public class ChestEvents extends BaseListener{
         Block b = e.getClickedBlock().getRelative(e.getBlockFace());
         Player player = e.getPlayer();
         if(plugin.isBlackListWorld(player.getWorld())) return;
-        new BukkitRunnable(){
-            @Override
-            public void run() {
+        // Check if the block face is null or if the block is null
+        if (b == null || e.getBlockFace() == null) return;
+
+        // Get the location of the block
+        Location blockLocation = b.getLocation();
+
+        // Run the task later at the location
+        WrappedSchedulerBuilder.builder()
+                .plugin(plugin)
+                .build()
+                .runTaskLaterAtLocation(blockLocation, () -> {
+
+//        new BukkitRunnable(){
+//            @Override
+//            public void run() {
                 if(!ChestUtils.isChest(b.getType())) {
                     return;
                 }
@@ -242,8 +256,8 @@ public class ChestEvents extends BaseListener{
                         }
                     }
                 }
-
-            }
-        }.runTaskLater(plugin, 1);
+//            }
+//        }.runTaskLater(plugin, 1);
+                }, 1);
     }
 }

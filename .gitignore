@@ -119,6 +119,28 @@ push.sh
 .classpath
 /.vscode/
 /.settings/
-.classpath
-/.vscode/
 homepc
+# User-specific stuff
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+
+
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Cache of project
+.gradletasknamecache
+
+**/build/
+./gradle/*
+./build.gradle/*
+./build.gradle
+build.gradle
+# Common working directory
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+/src/main/java/com/github/sachin/lib/

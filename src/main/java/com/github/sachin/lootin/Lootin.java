@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.UUID;
 
 import com.github.sachin.lootin.commands.Commands;
-import com.github.sachin.lootin.compat.WGFlag;
-import com.github.sachin.lootin.compat.rwg.RWGCompat;
+//import com.github.sachin.lootin.compat.WGFlag;
+//import com.github.sachin.lootin.compat.rwg.RWGCompat;
 import com.github.sachin.lootin.listeners.*;
-import com.github.sachin.lootin.compat.BetterStructuresListener;
-import com.github.sachin.lootin.compat.CustomStructuresListener;
-import com.github.sachin.lootin.compat.OTDLootListener;
+//import com.github.sachin.lootin.compat.BetterStructuresListener;
+//import com.github.sachin.lootin.compat.CustomStructuresListener;
+//import com.github.sachin.lootin.compat.OTDLootListener;
 import com.github.sachin.lootin.utils.ConfigUpdater;
 import com.github.sachin.lootin.utils.LConstants;
 import com.github.sachin.lootin.utils.Metrics;
@@ -21,6 +21,7 @@ import com.github.sachin.lootin.utils.cooldown.CooldownContainer;
 
 import com.github.sachin.prilib.McVersion;
 import com.github.sachin.prilib.Prilib;
+import me.nahu.scheduler.wrapper.FoliaWrappedJavaPlugin;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,13 +37,13 @@ import me.clip.placeholderapi.PlaceholderAPI;
 
 
 
-public final class Lootin extends JavaPlugin {
+public final class Lootin extends FoliaWrappedJavaPlugin {
 
     private static Lootin plugin;
 
     private Prilib prilib;
     private PaperCommandManager commandManager;
-    public RWGCompat rwgCompat;
+//    public RWGCompat rwgCompat;
     public List<Location> currentChestviewers = new ArrayList<>();
     public List<StorageMinecart> currentMinecartviewers = new ArrayList<>();
 
@@ -51,22 +52,22 @@ public final class Lootin extends JavaPlugin {
     public boolean isRunningPurpur;
     public boolean isRunningProtocolLib;
 
-    public boolean isRunningBetterStructures = false;
-    public boolean isRunningCustomStructures = false;
+//    public boolean isRunningBetterStructures = false;
+//    public boolean isRunningCustomStructures = false;
 
-    public boolean isRunningWG;
-
-    private WGFlag WGflag;
+//    public boolean isRunningWG;
+//
+//    private WGFlag WGflag;
 
     @Override
     public void onLoad() {
         plugin = this;
-        isRunningWG = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
-        if(isRunningWG){
-            WGflag = new WGFlag();
-            plugin.getLogger().info("Found WorldGuard, registering "+LConstants.WG_FLAG_NAME+" flag");
-            WGflag.registerFlag();
-        }
+//        isRunningWG = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
+//        if(isRunningWG){
+//            WGflag = new WGFlag();
+//            plugin.getLogger().info("Found WorldGuard, registering "+LConstants.WG_FLAG_NAME+" flag");
+//            WGflag.registerFlag();
+//        }
     }
 
     @Override
@@ -113,31 +114,31 @@ public final class Lootin extends JavaPlugin {
         pm.registerEvents(new ChestEvents(), plugin);
         pm.registerEvents(new ItemFrameListener(),plugin);
         pm.registerEvents(new LootGenerateListener(),plugin);
-        if(pm.isPluginEnabled("CustomStructures")){
-            this.isRunningCustomStructures = true;
-            getLogger().info("Found custom structures, registering listeners...");
-
-            pm.registerEvents(new CustomStructuresListener(), plugin);
-        }
-        if(pm.isPluginEnabled("Oh_the_dungeons_youll_go")){
-            getLogger().info("Found OhTheDungeons, registering listeners...");
-            pm.registerEvents(new OTDLootListener(), plugin);
-        }
-        if(pm.isPluginEnabled("Realistic_World")){
-            getLogger().info("Found RealisticWorldGenerator, trying to register compatibility addon...");
-            this.rwgCompat = new RWGCompat();
-            if (rwgCompat.enableRwgSupport(pm.getPlugin("Realistic_World"))) {
-                rwgCompat.setup();
-                getLogger().info("RealisticWorldGenerator addon successfully registered and installed");
-            } else {
-                getLogger().info("No need to register RealisticWorldGenerator compatibility addon");
-            }
-        }
-        if(pm.isPluginEnabled("BetterStructures")){
-            this.isRunningBetterStructures = true;
-            getLogger().info("Found BetterStructures, registering listeners...");
-            pm.registerEvents(new BetterStructuresListener(),plugin);
-        }
+//        if(pm.isPluginEnabled("CustomStructures")){
+//            this.isRunningCustomStructures = true;
+//            getLogger().info("Found custom structures, registering listeners...");
+//
+//            pm.registerEvents(new CustomStructuresListener(), plugin);
+//        }
+//        if(pm.isPluginEnabled("Oh_the_dungeons_youll_go")){
+//            getLogger().info("Found OhTheDungeons, registering listeners...");
+//            pm.registerEvents(new OTDLootListener(), plugin);
+//        }
+//        if(pm.isPluginEnabled("Realistic_World")){
+//            getLogger().info("Found RealisticWorldGenerator, trying to register compatibility addon...");
+//            this.rwgCompat = new RWGCompat();
+//            if (rwgCompat.enableRwgSupport(pm.getPlugin("Realistic_World"))) {
+//                rwgCompat.setup();
+//                getLogger().info("RealisticWorldGenerator addon successfully registered and installed");
+//            } else {
+//                getLogger().info("No need to register RealisticWorldGenerator compatibility addon");
+//            }
+//        }
+//        if(pm.isPluginEnabled("BetterStructures")){
+//            this.isRunningBetterStructures = true;
+//            getLogger().info("Found BetterStructures, registering listeners...");
+//            pm.registerEvents(new BetterStructuresListener(),plugin);
+//        }
         if(isRunningProtocolLib){
             getLogger().info("Found ProtocolLib, registering meta data packet listener...");
             new EntityMetaDataPacketListener();
@@ -243,9 +244,9 @@ public final class Lootin extends JavaPlugin {
         }
     }
 
-    public WGFlag getWGflag() {
-        return WGflag;
-    }
+//    public WGFlag getWGflag() {
+//        return WGflag;
+//    }
 
     public int getBarrelRowCount(){
         if(isRunningPurpur){

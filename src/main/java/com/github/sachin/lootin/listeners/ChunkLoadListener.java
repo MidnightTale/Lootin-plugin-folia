@@ -5,6 +5,7 @@ import com.github.sachin.lootin.utils.ChestUtils;
 import com.github.sachin.lootin.utils.ContainerType;
 import com.github.sachin.lootin.utils.LConstants;
 
+import me.nahu.scheduler.wrapper.WrappedSchedulerBuilder;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,7 +25,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.Lootable;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.scheduler.BukkitRunnable;
+//import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BlockTransformer;
 import org.bukkit.util.BoundingBox;
 
@@ -36,9 +37,14 @@ public class ChunkLoadListener extends BaseListener{
     public void onChunkLoad(ChunkLoadEvent e){
         Chunk chunk = e.getChunk();
         if(plugin.isBlackListWorld(chunk.getWorld())) return;
-        new BukkitRunnable() {
-            @Override
-            public void run() {
+
+        WrappedSchedulerBuilder.builder()
+                .plugin(plugin)
+                .build()
+                .runTaskLater(() -> {
+//        new BukkitRunnable() {
+//            @Override
+//            public void run() {
                 if(!chunk.isLoaded()) return;
                 boolean isNewChunk = e.isNewChunk();
 
@@ -85,8 +91,9 @@ public class ChunkLoadListener extends BaseListener{
                         }
                     }
                 }
-            }
-        }.runTaskLater(plugin, 1);
+//            }
+//        }.runTaskLater(plugin, 1);
+                }, 1);
     }
     
 }

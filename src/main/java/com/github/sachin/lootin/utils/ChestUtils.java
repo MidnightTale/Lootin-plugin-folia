@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.List;
 
 import com.github.sachin.lootin.Lootin;
-import com.github.sachin.lootin.compat.BetterStructuresListener;
-
-import com.github.sachin.lootin.compat.CustomStructuresListener;
+//import com.github.sachin.lootin.compat.BetterStructuresListener;
+//
+//import com.github.sachin.lootin.compat.CustomStructuresListener;
 import com.jeff_media.morepersistentdatatypes.DataType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -123,16 +123,16 @@ public class ChestUtils{
         String lootTableKey = null;
         NamespacedKey playerLootKey = Lootin.getKey(player.getUniqueId().toString());
         if(data.has(playerLootKey,PersistentDataType.STRING) || data.has(playerLootKey,DataType.ITEM_STACK_ARRAY)) return;
-        if(plugin.isRunningBetterStructures && plugin.getConfig().getBoolean(LConstants.RESET_SEED) && data.has(LConstants.BETTER_STRUC_KEY,PersistentDataType.STRING)){
-
-            Chest chest = (Chest) container;
-            BetterStructuresListener.refillChest(chest);
-            return;
-        }
-        if(plugin.isRunningCustomStructures && plugin.getConfig().getBoolean(LConstants.RESET_SEED) && data.has(LConstants.CUSTOM_STRUC_KEY,PersistentDataType.STRING)){
-            CustomStructuresListener.reFillContainer((Container) container);
-            return;
-        }
+//        if(plugin.isRunningBetterStructures && plugin.getConfig().getBoolean(LConstants.RESET_SEED) && data.has(LConstants.BETTER_STRUC_KEY,PersistentDataType.STRING)){
+//
+//            Chest chest = (Chest) container;
+//            BetterStructuresListener.refillChest(chest);
+//            return;
+//        }
+//        if(plugin.isRunningCustomStructures && plugin.getConfig().getBoolean(LConstants.RESET_SEED) && data.has(LConstants.CUSTOM_STRUC_KEY,PersistentDataType.STRING)){
+//            CustomStructuresListener.reFillContainer((Container) container);
+//            return;
+//        }
         if(container.getLootTable() != null){
             lootTableKey = container.getLootTable().getKey().toString();
             data.set(LConstants.LOOTTABLE_KEY,PersistentDataType.STRING,lootTableKey);

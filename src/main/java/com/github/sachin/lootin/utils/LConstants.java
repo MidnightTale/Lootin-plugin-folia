@@ -15,13 +15,13 @@ public class LConstants {
     public static final NamespacedKey TRANSFORMER_MINECART_KEY = new NamespacedKey(Lootin.getPlugin(), "lootin-minecart");
     public static final NamespacedKey DATA_KEY = new NamespacedKey(Lootin.getPlugin(), DATA_KEY_STRING);
     public static final NamespacedKey ITEM_FRAME_ELYTRA_KEY = Lootin.getKey("item-frame-elytra-key");
-    public static final NamespacedKey RWG_LOOTTABLE_KEY = Lootin.getKey("rwg-loottable-key");
-    public static final NamespacedKey RWG_IDENTITY_KEY = Lootin.getKey("rwg-identity-key");
+//    public static final NamespacedKey RWG_LOOTTABLE_KEY = Lootin.getKey("rwg-loottable-key");
+//    public static final NamespacedKey RWG_IDENTITY_KEY = Lootin.getKey("rwg-identity-key");
 
     public static final NamespacedKey LOOTTABLE_KEY = Lootin.getKey("lotttable");
 
-    public static final NamespacedKey BETTER_STRUC_KEY = Lootin.getKey("better-structures-name-key");
-    public static final NamespacedKey CUSTOM_STRUC_KEY = Lootin.getKey("custom-structures-name-key");
+//    public static final NamespacedKey BETTER_STRUC_KEY = Lootin.getKey("better-structures-name-key");
+//    public static final NamespacedKey CUSTOM_STRUC_KEY = Lootin.getKey("custom-structures-name-key");
 
     public static final String TITLE_CHEST = "gui-titles.chest";
     public static final String TITLE_DOUBLE_CHEST = "gui-titles.double-chest";
@@ -43,8 +43,8 @@ public class LConstants {
 
 //    public static final String BLACK_LIST_
     public static final String BLACK_LIST_STRUCTURES = "black-list-structures";
-    public static final String BLACK_LIST_CUSTOM_STRUCTURES = "black-list-customstructures";
-    public static final String BLACK_LIST_OTD_STRUCTURES = "black-list-otd-structures";
+//    public static final String BLACK_LIST_CUSTOM_STRUCTURES = "black-list-customstructures";
+//    public static final String BLACK_LIST_OTD_STRUCTURES = "black-list-otd-structures";
     public static final String PER_PLAYER_ELYTRA_ITEM_FRAME = "per-player-elytra-item-frame";
     public static final String BYPASS_GREIF_PLUGINS = "bypass-grief-plugins";
 
@@ -59,10 +59,25 @@ public class LConstants {
     public static final String ELYTRA_IF_REMOVED = "messages.elytra-item-frame-removed";
 
     public static final String MINECRAFT_VERSION = Bukkit.getVersion().split(" ", 3)[2].replace(")", "");
-    public static final String SERVER_VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.", 4)[3];
+    //public static final String SERVER_VERSION = Bukkit.getServer().getClass().getPackage().getName().split("\\.", 4)[3];
+    public static final String SERVER_VERSION;
+
+    static {
+        String[] packageNameParts = Bukkit.getServer().getClass().getPackage().getName().split("\\.", 4);
+        if (packageNameParts.length >= 4) {
+            SERVER_VERSION = packageNameParts[3];
+        } else {
+            SERVER_VERSION = "1.20.6";
+            Lootin.getPlugin().getLogger().warning("Failed to determine server version. Array length is less than 4.");
+        }
+    }
+
+
+
     public static final int SERVER_MINOR_VERSION = Integer.parseInt(MINECRAFT_VERSION.split("\\.")[1]);
 
     public static final boolean SERVER_REMAPPED = LConstants.SERVER_MINOR_VERSION >= 17;
 
-    public static final String WG_FLAG_NAME = "lootin-container-access";
+//    public static final String WG_FLAG_NAME = "lootin-container-access";
 }
+
